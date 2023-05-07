@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function AvatarCard({ avatar }) {
 
@@ -10,7 +11,7 @@ function AvatarCard({ avatar }) {
   const getAvatar = async () => {
     try {
       const req = await axios.get(`${avatar.url}`)
-      console.log(req.data)
+      // console.log(req.data)
       setcurrentAvatar(req.data)
     } catch (error) {
       console.log(error)
@@ -36,7 +37,9 @@ function AvatarCard({ avatar }) {
         isShowing ?
           <div>
             <center>
-              <img src={`${currentAvatar?.sprites?.front_shiny}`} className='h-[150px]' alt={avatar?.name} />
+              <Link to={`/pokemon/${currentAvatar?.id}`}>
+                <img src={`${currentAvatar?.sprites?.front_shiny}`} className='h-[150px]' alt={avatar?.name} />
+              </Link>
               <div>
                 {
                   currentAvatar?.stats?.map((stat) => (
